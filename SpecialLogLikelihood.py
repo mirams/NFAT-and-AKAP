@@ -7,14 +7,14 @@ from model import NfatModel
 # import matplotlib.pyplot as plt
 
 akap_nfatp_times = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(0))
+    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(0))
 akap_nfatp_means = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
+    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
 
 # Scale down such that the mean of the first 4 points is at 100%.
 akap_nfatp_means = akap_nfatp_means/np.mean(akap_nfatp_means[0:3])
 # akap_nfatp_sems = np.genfromtxt(
-#    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
+#    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
 
 
 class SpecialLogLikelihood(pints.LogPDF):

@@ -65,11 +65,11 @@ plt.legend(["AKAP bound to NFAT", "NFAT on membrane"])
 plt.show()
 
 akap_nfatp_times = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(0))
+    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(0))
 akap_nfatp_means = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
+    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
 akap_nfatp_sems = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
+    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
 
 plt.figure()
 plt.xlabel('Time')
