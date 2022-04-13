@@ -17,16 +17,19 @@ times = np.linspace(-200, 360, 56001)
 #      0.0453,
 #      0]
 
-# Parameters emphasising fit to time series data.
-p = np.array([1, 1.2, 1.16780786e-01, 3.98668968e-09, 1.24927252e-01, 1.54461197e-02,
-              9.70732458e-01, 2.57708271e-01, 0.1])
 
-p = np.array([1, 1.2, 1.16775701e-01, 1.07196238e-09, 1.24900543e-01, 1.54407345e-02,
-              9.70531523e-01, 0.5])
+# Parameters emphasising fit to time series data.
+p = np.array([1, 1.2, 0.17743636, 0.0495394,  0.06270813,
+             0.01552823, 0.34830096, 0.84645488, 0.1])
+
+p = np.array([1, 1.2, 0.17743636, 0.0495394,  0.06270813,
+             0.01552823, 0.34830096, 0.84645488, 0.5])
+
+baseline_params = np.array(
+    [1, 1.2, 0.17306501, 0.02632026, 0.07175625, 0.01612891, 0.37993729, 0.1])
 
 # Parameters emphasising nuclear accumulation getting near 70%.
-p = np.array([1, 1.2, 2e-01, 5.09607342e-02, 1.32400276e-01, 1.70008543e-02,
-              1.00250977e+00, 0.1, 0])  # NO NUCLEAR EXPORT
+p = np.concatenate([baseline_params, [0]])  # NO NUCLEAR EXPORT
 
 
 model = NfatModel()
@@ -86,9 +89,9 @@ plt.show()
 
 
 akap_nfatp_times = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(0))
+    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(0))
 akap_nfatp_means = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
+    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
 akap_nfatp_means = akap_nfatp_means/np.mean(akap_nfatp_means[0:3])
 # akap_nfatp_sems = np.genfromtxt(
 #    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
@@ -104,8 +107,7 @@ plt.plot([36, 36], [0, 110], '--', color='grey')
 plt.show()
 
 
-p = np.array([1, 1.2, 2e-01, 5.09607342e-02, 1.32400276e-01, 1.70008543e-02,
-              1.00250977e+00, 0.1, 0.01])  # SLOW NUCLEAR EXPORT
+p = np.concatenate([baseline_params, [0.01]])  # SLOW NUCLEAR EXPORT
 
 values, markers = model.simulate(p, times)
 print("markers = ", markers)
@@ -161,14 +163,6 @@ plt.legend(["AKAP bound to NFAT", "NFAT on membrane"])
 plt.show()
 
 
-akap_nfatp_times = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(0))
-akap_nfatp_means = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
-akap_nfatp_means = akap_nfatp_means/np.mean(akap_nfatp_means[0:3])
-# akap_nfatp_sems = np.genfromtxt(
-#    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
-
 plt.figure()
 plt.xlabel('Time')
 plt.ylabel('Proportion of AKAP:NFAT co-localised (% of mean value t<0)')
@@ -179,8 +173,7 @@ plt.plot([0, 0], [0, 110], '--', color='grey')
 plt.plot([36, 36], [0, 110], '--', color='grey')
 plt.show()
 
-p = np.array([1, 1.2, 2e-01, 5.09607342e-02, 1.32400276e-01, 1.70008543e-02,
-              1.00250977e+00, 0.1, 0.1])  # IMPORT/EXPORT at same rate
+p = np.concatenate([baseline_params, [0.1]])   # IMPORT/EXPORT at same rate
 
 values, markers = model.simulate(p, times)
 print("markers = ", markers)
@@ -221,15 +214,6 @@ plt.plot([0, 0], [0, 1], '--', color='grey')
 plt.plot([36, 36], [0, 1], '--', color='grey')
 plt.xlim([-10, 200])
 plt.show()
-
-
-akap_nfatp_times = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(0))
-akap_nfatp_means = np.genfromtxt(
-    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
-akap_nfatp_means = akap_nfatp_means/np.mean(akap_nfatp_means[0:3])
-# akap_nfatp_sems = np.genfromtxt(
-#    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
 
 plt.figure()
 plt.xlabel('Time')

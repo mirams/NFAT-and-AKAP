@@ -20,7 +20,7 @@ akap_nfatp_means = akap_nfatp_means/np.mean(akap_nfatp_means[0:3])
 class SpecialLogLikelihood(pints.LogPDF):
 
     def __call__(self, params):
-        assert(len(params) == 6)
+        assert(len(params) == 5)
 
         for param in params:
             if param < 0:
@@ -33,7 +33,7 @@ class SpecialLogLikelihood(pints.LogPDF):
         p = np.array([1, 1.2])
 
         values, markers = model.simulate(
-            np.concatenate([p, params, [0.0]]), times)
+            np.concatenate([p, params, [0.1, 0.0]]), times)
 
         if len(values) != len(times):
             log_likelihood = -1e9*sum(params**2)
@@ -73,7 +73,7 @@ class SpecialLogLikelihood(pints.LogPDF):
         #    akap_nfatp_times)*(akap_nfatp_sems[i]*akap_nfatp_sems[i])
         # print('Sigma timecourse = ', std_of_timecourse_data)
 
-        timecourse_sigma = 0.5
+        timecourse_sigma = 0.07
         sum_sq = 0
         for i in range(1, len(akap_nfatp_times)):
             sum_sq = sum_sq+(akap_nfat_prediction_interpolator(
@@ -91,7 +91,14 @@ class SpecialLogLikelihood(pints.LogPDF):
         # plt.plot(times, 100*(an+anc)/np.max(an+anc))
         # plt.show()
 
+        # Add a penalty for k2 being too small and AC never dissociating back to A (and ANC never dissociating back to AN)
+        penalty_sigma = 0.1
+        neg_time_index = np.where(np.abs(times) < 1e-12)
+        target_end_an = an[neg_time_index[0]][0]
+        log_likelihood = log_likelihood - 1.0 / \
+            (2.0*penalty_sigma**2)*(target_end_an - an[-1])**2
+
         return log_likelihood
 
     def n_parameters(self):
-        return 6
+        return 5

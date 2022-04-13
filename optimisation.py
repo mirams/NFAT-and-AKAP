@@ -10,10 +10,10 @@ np.random.seed(1)
 log_like = SpecialLogLikelihood()
 
 boundaries = pints.RectangularBoundaries(
-    [1e-9, 1e-9, 1e-9, 1e-9, 1e-9, 1e-9], [2, 2, 2, 2, 2, 2])
+    [1e-9, 1e-9, 1e-9, 1e-9, 1e-9], [2, 2, 2, 2, 2])
 
-p_guess = np.array([1.65096678e-01, 3.31074825e-7, 1.30545310e-01, 2.12751554e-02,
-                    1.99999983e+00, 2.03978544e-01])
+p_guess = np.array([1.16458770e-01, 5.09607342e-04,
+                   1.32400276e-01, 1.70008543e-02, 1.00250977e+00])
 
 print("Initial guess log likelihood = ", log_like(p_guess))
 
@@ -27,7 +27,7 @@ model = NfatModel()
 times = np.linspace(-200, 360, 56001)
 p = np.array([1, 1.2])
 values, markers = model.simulate(
-    np.concatenate([p, found_params, [0.0]]), times)
+    np.concatenate([p, found_params, [0.1, 0.0]]), times)
 
 print("markers = ", markers)
 

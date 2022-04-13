@@ -1,9 +1,6 @@
-from operator import delitem
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import odeint
 from model import NfatModel
-from SpecialLogLikelihood import SpecialLogLikelihood
 # Define the right-hand side of a system of ODEs
 
 
@@ -25,16 +22,17 @@ p = np.array([1, 1.2, 1.16775701e-01, 1.07196238e-09, 1.24900543e-01, 1.54407345
               9.70531523e-01, 0.5])
 
 # Parameters emphasising nuclear accumulation getting near 70%.
-p = np.array([1, 1.2, 1.16458770e-01, 5.09607342e-04, 1.32400276e-01, 1.70008543e-02,
-              1.00250977e+00, 0.1, 0])  # NO NUCLEAR EXPORT
+# NO NUCLEAR EXPORT
+p = np.array([1, 1.2, 0.17306501, 0.02632026,
+             0.07175625, 0.01612891, 0.37993729, 0.1, 0])
 
 
-p = np.array([1, 1.2, 1.16458770e-01, 5.09607342e-04, 1.32400276e-01, 1.70008543e-02,
-              1.00250977e+00, 0.1, 0.01])  # SLOW NUCLEAR EXPORT
+p = np.array([1, 1.2, 0.17306501, 0.02632026,
+             0.07175625, 0.01612891, 0.37993729, 0.1, 0.01])  # SLOW NUCLEAR EXPORT
 
 
-p = np.array([1, 1.2, 1.16458770e-01, 5.09607342e-03, 1.32400276e-01, 1.70008543e-02,
-              1.00250977e+00, 0.1, 0.1])  # IMPORT/EXPORT at same rate
+# p = np.array([1, 1.2, 0.17306501, 0.02632026,
+# 0.07175625, 0.01612891, 0.37993729, 0.1, 0.1])  # IMPORT/EXPORT at same rate (fast)
 
 
 model = NfatModel()
@@ -97,7 +95,7 @@ akap_nfatp_times = np.genfromtxt(
     'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(0))
 akap_nfatp_means = np.genfromtxt(
     'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
-akap_nfatp_means = akap_nfatp_means/np.mean(akap_nfatp_means[0:3])
+akap_nfatp_means = akap_nfatp_means/np.mean(akap_nfatp_means[0: 3])
 # akap_nfatp_sems = np.genfromtxt(
 #    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
 
