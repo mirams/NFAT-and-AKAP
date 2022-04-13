@@ -1,3 +1,4 @@
+from matplotlib.markers import MarkerStyle
 import numpy as np
 import matplotlib.pyplot as plt
 from model import NfatModel
@@ -96,13 +97,14 @@ akap_nfatp_times = np.genfromtxt(
 akap_nfatp_means = np.genfromtxt(
     'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
 akap_nfatp_means = akap_nfatp_means/np.mean(akap_nfatp_means[0: 3])
-# akap_nfatp_sems = np.genfromtxt(
-#    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
+akap_nfatp_sems = np.genfromtxt(
+    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))/np.mean(akap_nfatp_means[0: 3])
 
 plt.figure()
 plt.xlabel('Time')
 plt.ylabel('Proportion of AKAP:NFAT co-localised (% of mean value t<0)')
-plt.plot(akap_nfatp_times, 100*akap_nfatp_means, 'x')
+plt.errorbar(akap_nfatp_times, 100*akap_nfatp_means,
+             yerr=100*akap_nfatp_sems, capsize=1, lw=1, ls='', marker='x')
 plt.plot(times, prop_akap_bound_nfat)
 plt.xlim([-30, 150])
 plt.plot([0, 0], [0, 110], '--', color='grey')

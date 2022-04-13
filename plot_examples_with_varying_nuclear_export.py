@@ -31,7 +31,6 @@ baseline_params = np.array(
 # Parameters emphasising nuclear accumulation getting near 70%.
 p = np.concatenate([baseline_params, [0]])  # NO NUCLEAR EXPORT
 
-
 model = NfatModel()
 values, markers = model.simulate(p, times)
 print("markers = ", markers)
@@ -93,13 +92,14 @@ akap_nfatp_times = np.genfromtxt(
 akap_nfatp_means = np.genfromtxt(
     'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(2))
 akap_nfatp_means = akap_nfatp_means/np.mean(akap_nfatp_means[0:3])
-# akap_nfatp_sems = np.genfromtxt(
-#    '../NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))
+akap_nfatp_sems = np.genfromtxt(
+    'data/NFAT-AKAP disasociation-F7E.csv', delimiter=',', skip_header=1, usecols=(3))/np.mean(akap_nfatp_means[0:3])
 
 plt.figure()
 plt.xlabel('Time')
 plt.ylabel('Proportion of AKAP:NFAT co-localised (% of mean value t<0)')
-plt.plot(akap_nfatp_times, 100*akap_nfatp_means, 'x')
+plt.errorbar(akap_nfatp_times, 100*akap_nfatp_means,
+             yerr=100*akap_nfatp_sems, capsize=1, lw=1, ls='', marker='x')
 plt.plot(times, prop_akap_bound_nfat_no_export)
 plt.xlim([-30, 150])
 plt.plot([0, 0], [0, 110], '--', color='grey')
@@ -166,7 +166,8 @@ plt.show()
 plt.figure()
 plt.xlabel('Time')
 plt.ylabel('Proportion of AKAP:NFAT co-localised (% of mean value t<0)')
-plt.plot(akap_nfatp_times, 100*akap_nfatp_means, 'x')
+plt.errorbar(akap_nfatp_times, 100*akap_nfatp_means,
+             yerr=100*akap_nfatp_sems, capsize=1, lw=1, ls='', marker='x')
 plt.plot(times, prop_akap_bound_nfat_slow_export)
 plt.xlim([-30, 150])
 plt.plot([0, 0], [0, 110], '--', color='grey')
@@ -216,14 +217,15 @@ plt.xlim([-10, 200])
 plt.show()
 
 plt.figure()
-plt.xlabel('Time')
+plt.xlabel('Time (minutes since CRAC stimulation)')
 plt.ylabel('Proportion of AKAP:NFAT co-localised (% of mean value t<0)')
-plt.plot(akap_nfatp_times, 100*akap_nfatp_means, 'x')
+plt.errorbar(akap_nfatp_times, 100*akap_nfatp_means,
+             yerr=100*akap_nfatp_sems, capsize=1, lw=1, ls='', marker='x')
 plt.plot(times, prop_akap_bound_nfat_no_export, color='orange')
 plt.plot(times, prop_akap_bound_nfat_slow_export, color='red')
 plt.plot(times, prop_akap_bound_nfat_fast_export, color='blue')
-plt.legend(["Data", "Sim - no nuclear export",
-           "Sim - slow nuclear export", "Sim - fast nuclear export"])
+plt.legend(["Sim - no nuclear export",
+           "Sim - slow nuclear export", "Sim - fast nuclear export", "Data +/- s.e.m."])
 plt.xlim([-30, 150])
 plt.plot([0, 0], [0, 110], '--', color='grey')
 plt.plot([36, 36], [0, 110], '--', color='grey')
