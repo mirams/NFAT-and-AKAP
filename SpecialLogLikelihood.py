@@ -62,7 +62,7 @@ class SpecialLogLikelihood(pints.LogPDF):
         akap_nfat_prediction_interpolator = interpolate.interp1d(
             times, proportion)
 
-        # Add a constraint for nuclear proportion of NFAT at the end to be about 70%
+        # Add a constraint for nuclear proportion of NFAT at the end to be about 80%
         # Weight on fitting this (smaller = more weight)
         nuc_prop_sigma = 1.0
         nuclear_proportion = nn/p[1]
