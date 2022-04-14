@@ -66,8 +66,10 @@ class SpecialLogLikelihood(pints.LogPDF):
         # Weight on fitting this (smaller = more weight)
         nuc_prop_sigma = 1.0
         nuclear_proportion = nn/p[1]
+        min_20_time_index = np.where(np.abs(times-20) < 1e-12)
+        nuclear_proportion_time_20 = nuclear_proportion[min_20_time_index[0]][0]
         log_likelihood = log_likelihood - 0.5*np.log(2*np.pi*nuc_prop_sigma**2)-(
-            1.0/(2.0*nuc_prop_sigma**2))*(nuclear_proportion[-1] - 0.7)**2
+            1.0/(2.0*nuc_prop_sigma**2))*(nuclear_proportion_time_20 - 0.80)**2
 
         # std_of_timecourse_data = len(
         #    akap_nfatp_times)*(akap_nfatp_sems[i]*akap_nfatp_sems[i])

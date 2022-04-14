@@ -1,32 +1,12 @@
-from operator import delitem
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import odeint
 from model import NfatModel
-from SpecialLogLikelihood import SpecialLogLikelihood
-# Define the right-hand side of a system of ODEs
-
 
 times = np.linspace(-200, 360, 56001)
-# parameters
-# p = [1, 1.2,
-#      0.1195,
-#      0.1003,
-#      0.1089,
-#      1.1357,
-#      0.0453,
-#      0]
-
-
-# Parameters emphasising fit to time series data.
-p = np.array([1, 1.2, 0.17743636, 0.0495394,  0.06270813,
-             0.01552823, 0.34830096, 0.84645488, 0.1])
-
-p = np.array([1, 1.2, 0.17743636, 0.0495394,  0.06270813,
-             0.01552823, 0.34830096, 0.84645488, 0.5])
 
 baseline_params = np.array(
-    [1, 1.2, 0.17306501, 0.02632026, 0.07175625, 0.01612891, 0.37993729, 0.1])
+    [1, 1.2, 0.17527934, 0.02647466, 0.07168039,
+     0.01607605, 0.37648643, 0.1])
 
 # Parameters emphasising nuclear accumulation getting near 70%.
 p = np.concatenate([baseline_params, [0]])  # NO NUCLEAR EXPORT

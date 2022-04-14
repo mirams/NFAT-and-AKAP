@@ -12,8 +12,8 @@ log_like = SpecialLogLikelihood()
 boundaries = pints.RectangularBoundaries(
     [1e-9, 1e-9, 1e-9, 1e-9, 1e-9], [2, 2, 2, 2, 2])
 
-p_guess = np.array([1.16458770e-01, 5.09607342e-04,
-                   1.32400276e-01, 1.70008543e-02, 1.00250977e+00])
+p_guess = np.array([0.17306501, 0.02632026,
+                    0.07175625, 0.01612891, 0.37993729])
 
 print("Initial guess log likelihood = ", log_like(p_guess))
 
