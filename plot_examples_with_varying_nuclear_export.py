@@ -197,7 +197,7 @@ plt.show()
 
 plt.figure()
 plt.xlabel('Time (minutes since Thap addition)')
-plt.ylabel('Proportion of AKAP:NFAT co-localised (% of mean value t<0)')
+plt.ylabel('Proportion of AKAP co-localised with NFAT (% of mean value t<0)')
 plt.errorbar(akap_nfatp_times+10, 100*akap_nfatp_means,
              yerr=100*akap_nfatp_sems, capsize=1, lw=1, ls='', marker='x')
 plt.plot(times+10, prop_akap_bound_nfat_no_export, color='orange')
