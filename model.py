@@ -63,8 +63,9 @@ class NfatModel(pints.ForwardModel):
         percentage_akap_bound_to_nfat = 100*(an+anc)/parameters[0]
         percentage_nfat_on_membrane = 100*(an+anc)/parameters[1]
 
-        idx_time_zero = 20000
-        idx_steady_on = 23600
+        idx_time_zero = np.argmax(times >= 0)
+        idx_steady_on = np.argmax(times >= 36)
+
         markers[0] = percentage_nfat_on_membrane[idx_time_zero]
         markers[1] = percentage_nfat_on_membrane[idx_steady_on]
         markers[2] = percentage_akap_bound_to_nfat[idx_time_zero]
