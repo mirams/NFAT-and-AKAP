@@ -28,9 +28,9 @@ class SpecialLogLikelihood(pints.LogPDF):
             if param > 2:
                 print("More than 2!")
 
-        times = np.linspace(-200, 60, 26001)
+        times = np.linspace(-500, 60, 56001)
         model = NfatModel()
-        p = np.array([1, 1.2])
+        p = np.array([1, 2])
 
         values, markers = model.simulate(
             np.concatenate([p, params, [0.1, 0.0]]), times)
@@ -39,8 +39,10 @@ class SpecialLogLikelihood(pints.LogPDF):
             log_likelihood = -1e9*sum(params**2)
             return
 
-        correct_answers = [24, 11, 26, 17, 8, 12]
-        sigmas = [9, 6, 9, 6, 3, 3]
+        # correct_answers = [24, 11, 26, 17, 8, 12] # These were the original confocal estimates
+        # These are the new 3D scan estimates for NFAT locations
+        correct_answers = [12, 5.6, 26, 17, 8, 12]
+        sigmas = [1.7, 1.7, 9, 6, 3, 3]
 
         log_likelihood = 0
         for i in range(0, len(correct_answers)):

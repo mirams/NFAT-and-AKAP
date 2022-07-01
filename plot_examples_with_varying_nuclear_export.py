@@ -4,8 +4,12 @@ from model import NfatModel
 
 times = np.linspace(-200, 360, 56001)
 
+# Old params from original optimsation (see change on lines 42-44 of specialloglikelihood)
+# baseline_params = np.array(
+#    [1, 1.2, 0.17299323, 0.0273452,  0.07162728, 0.01610738, 0.38311162, 0.1])
+
 baseline_params = np.array(
-    [1, 1.2, 0.17299323, 0.0273452,  0.07162728, 0.01610738, 0.38311162, 0.1])
+    [1, 2, 0.14611337, 0.02547575, 0.07700975, 0.01420659, 0.59655061, 0.1])
 
 # Parameters emphasising nuclear accumulation getting near 70%.
 p = np.concatenate([baseline_params, [0]])  # NO NUCLEAR EXPORT
@@ -58,8 +62,8 @@ plt.xlabel('Time (mins)')
 plt.ylabel('Percentage (%)')
 plt.plot(times+10, percentage_akap_bound_to_nfat)
 plt.plot(times+10, percentage_nfat_on_membrane)
-plt.plot(9, 24, 'x')
-plt.plot(40, 11, 'x')
+plt.plot(9, 12, 'x')
+plt.plot(40, 5.6, 'x')
 plt.plot(9, 26, 'x')
 plt.plot(40, 17, 'x')
 plt.legend(["AKAP bound to NFAT", "NFAT on membrane"])
@@ -134,8 +138,8 @@ plt.xlabel('Time (mins)')
 plt.ylabel('Percentage (%)')
 plt.plot(times+10, percentage_akap_bound_to_nfat)
 plt.plot(times+10, percentage_nfat_on_membrane)
-plt.plot(-1, 24, 'x')
-plt.plot(30, 11, 'x')
+plt.plot(-1, 12, 'x')
+plt.plot(30, 5.6, 'x')
 plt.plot(-1, 26, 'x')
 plt.plot(30, 17, 'x')
 plt.legend(["AKAP bound to NFAT", "NFAT on membrane"])

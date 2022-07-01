@@ -15,26 +15,11 @@ times = np.linspace(-200, 360, 56001)
 #      0.0453,
 #      0]
 
-# Parameters emphasising fit to time series data.
-p = np.array([1, 1.2, 1.16780786e-01, 3.98668968e-09, 1.24927252e-01, 1.54461197e-02,
-              9.70732458e-01, 2.57708271e-01, 0.1])
 
-p = np.array([1, 1.2, 1.16775701e-01, 1.07196238e-09, 1.24900543e-01, 1.54407345e-02,
-              9.70531523e-01, 0.5])
-
-# Parameters emphasising nuclear accumulation getting near 70%.
-# NO NUCLEAR EXPORT
-p = np.array([1, 1.2, 0.17299323, 0.0273452,  0.07162728,
-             0.01610738, 0.38311162, 0.1, 0])
-
-
-# SLOW NUCLEAR EXPORT
-p = np.array([1, 1.2, 0.17299323, 0.0273452,  0.07162728,
-             0.01610738, 0.38311162, 0.1, 0.01])
-
-
-# p = np.array([1, 1.2, 0.17299323, 0.0273452,  0.07162728, 0.01610738, 0.38311162, 0.1, 0.1])  # IMPORT/EXPORT at same rate (fast)
-
+# The 'slow nuclear export' parameter set.
+p = np.array([1, 2, 0.14611337, 0.02547575, 0.07700975,
+             0.01420659, 0.59655061, 0.1, 0.01])
+# parameters p[2]...p[6] come from running optimisation.py the last two are manually set nuclear import and export.
 
 model = NfatModel()
 values, markers = model.simulate(p, times)
@@ -84,8 +69,8 @@ plt.xlabel('Time (mins)')
 plt.ylabel('Percentage (%)')
 plt.plot(times, percentage_akap_bound_to_nfat)
 plt.plot(times, percentage_nfat_on_membrane)
-plt.plot(-1, 24, 'x')
-plt.plot(30, 11, 'x')
+plt.plot(-1, 12, 'x')
+plt.plot(30, 5.6, 'x')
 plt.plot(-1, 26, 'x')
 plt.plot(30, 17, 'x')
 plt.legend(["AKAP bound to NFAT", "NFAT on membrane"])
