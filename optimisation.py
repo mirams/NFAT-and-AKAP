@@ -12,8 +12,7 @@ log_like = SpecialLogLikelihood()
 boundaries = pints.RectangularBoundaries(
     [1e-9, 1e-9, 1e-9, 1e-9, 1e-9], [2, 2, 2, 2, 2])
 
-p_guess = np.array([0.17306501, 0.02632026,
-                    0.07175625, 0.01612891, 0.37993729])
+p_guess = np.array([0.15598587, 0.01369596, 0.08663907, 0.01586231, 0.4699524])
 
 print("Initial guess log likelihood = ", log_like(p_guess))
 
@@ -24,8 +23,8 @@ print("Found params = ", found_params)
 print("With score = ", log_like(found_params))
 
 model = NfatModel()
-times = np.linspace(-200, 360, 56001)
-p = np.array([1, 1.2])
+times = np.linspace(-500, 360, 86001)
+p = np.array([1, 2])
 values, markers = model.simulate(
     np.concatenate([p, found_params, [0.1, 0.0]]), times)
 
@@ -57,8 +56,8 @@ plt.xlabel('Time')
 plt.ylabel('Percentage (%)')
 plt.plot(times, percentage_akap_bound_to_nfat)
 plt.plot(times, percentage_nfat_on_membrane)
-plt.plot(-1, 24, 'x')
-plt.plot(30, 11, 'x')
+plt.plot(-1, 12, 'x')
+plt.plot(30, 5.6, 'x')
 plt.plot(-1, 26, 'x')
 plt.plot(30, 17, 'x')
 plt.legend(["AKAP bound to NFAT", "NFAT on membrane"])
